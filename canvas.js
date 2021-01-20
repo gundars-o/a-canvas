@@ -35,14 +35,25 @@ function drawOnCanvas() {
     };
     // Move Circle
     var x = 200;
+    var y = 200;
+    var dx = 5 ;
+    var dy = 5 ;
+    var r = 30;
     function animate() {
         requestAnimationFrame( animate );
         c.clearRect( 0, 0, innerWidth, innerHeight );
         c.beginPath();
-        c.arc( x, 200, 30, 0, Math.PI * 2, false );
+        c.arc( x, y, r, 0, Math.PI * 2, false );
         c.strokeStyle = "blue";
         c.stroke();
-        x += 1;
+        if ( x >= innerWidth - r || x <= r ) {
+            dx = - dx;
+        };
+        if ( y >= innerHeight - r || y <= r ) {
+            dy = - dy;
+        };
+        x += dx;
+        y += dy;
     };
     animate();
 };
