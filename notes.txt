@@ -14,3 +14,8 @@ branch main
 git add .
 git commit -m "Canvas streched to whole screen"
 git push
+
+branch main
+git add .
+git commit -m "Controlling canvas by JS enabled"
+git push
