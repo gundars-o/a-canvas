@@ -22,8 +22,15 @@ function drawOnCanvas() {
     c.strokeStyle = "#fa34a3";
     c.stroke();
     // Circle
-    c.beginPath();
-    c.arc( 300,300, 30, 0, Math.PI * 2, false );
-    c.strokeStyle = "blue";
-    c.stroke();
+    for ( i = 0; i < 10; i++ ) {
+        drawCircle();
+    };
+    function drawCircle() {
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+        c.beginPath();
+        c.arc( x, y, 30, 0, Math.PI * 2, false );
+        c.strokeStyle = "blue";
+        c.stroke();
+    };
 };
