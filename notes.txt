@@ -4,3 +4,8 @@ git commit -m "Draw invisible canvas"
 git remote add origin https://github.com/gundars-o/a-canvas.git
 git branch -M main
 git push -u origin main
+
+branch main
+git add .
+git commit -m "Canvas made visible"
+git push
