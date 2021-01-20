@@ -34,11 +34,17 @@ function drawOnCanvas() {
         c.stroke();
     };
     // Move Circle
-    var x = 200;
-    var y = 200;
-    var dx = 5 ;
-    var dy = 5 ;
     var r = 30;
+    var x = Math.random() * ( innerWidth - 2 * r ) + r;
+    var y = Math.random() * ( innerHeight - 2 * r ) + r;
+    var dx = 0;
+    while ( dx === 0 ) {
+        dx = Math.random() * 5 - 10;
+    };
+    var dy = 0;
+    while ( dy === 0 ) {
+        dy = Math.random() * 5 - 10;
+    };
     function animate() {
         requestAnimationFrame( animate );
         c.clearRect( 0, 0, innerWidth, innerHeight );
@@ -53,6 +59,7 @@ function drawOnCanvas() {
             dy = - dy;
         };
         x += dx;
+        console.log( x );
         y += dy;
     };
     animate();
