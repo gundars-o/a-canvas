@@ -4,16 +4,21 @@ var c = canvas.getContext( "2d" );
 function setCanvasSize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    console.log( canvas.width );
-    console.log( canvas.height );
     drawOnCanvas()
 };
 function drawOnCanvas() {
+    c.fillStyle = "rgba( 255, 0, 0, 0.5 )";
     c.fillRect( 10, 30, 50, 100 );
+    c.fillStyle = "rgba( 0, 0, 255, 0.5 )";
+    c.fillRect( 400, 100, 100, 100 );
+    c.fillRect( 300, 300, 100, 100 );
     // Lines
     c.beginPath();
     c.moveTo( 9, 29 );
     c.lineTo( 61, 29 );
+    c.lineTo( 400, 100 );
+    c.lineTo( 300, 300 );
+    c.strokeStyle = "#fa34a3";
     c.stroke();
 };
 setCanvasSize();
