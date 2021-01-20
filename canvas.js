@@ -45,22 +45,37 @@ function drawOnCanvas() {
     while ( dy === 0 ) {
         dy = Math.random() * 5 - 10;
     };
+    var circle = new Circle( x, y, dx, dy, r );
+    circle.draw();
+    animate();
+    function Circle( x, y, dx, dy, r ) {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+        this.r = r;
+        this.draw = function() {
+            c.beginPath();
+            c.arc( this.x, this.y, this.r, 0, Math.PI * 2, false );
+            c.strokeStyle = "blue";
+            c.stroke();
+            c.fill();
+        };
+        this.update = function() {
+            if ( this.x >= innerWidth - this.r || this.x <= this.r ) {
+                this.dx = - this.dx;
+            };
+            if ( this.y >= innerHeight - this.r || this.y <= this.r ) {
+                this.dy = - this.dy;
+            };
+            this.x += this.dx;
+            this.y += this.dy;
+            this.draw();
+        };
+    };
     function animate() {
         requestAnimationFrame( animate );
         c.clearRect( 0, 0, innerWidth, innerHeight );
-        c.beginPath();
-        c.arc( x, y, r, 0, Math.PI * 2, false );
-        c.strokeStyle = "blue";
-        c.stroke();
-        if ( x >= innerWidth - r || x <= r ) {
-            dx = - dx;
-        };
-        if ( y >= innerHeight - r || y <= r ) {
-            dy = - dy;
-        };
-        x += dx;
-        console.log( x );
-        y += dy;
+        circle.update();
     };
-    animate();
 };
