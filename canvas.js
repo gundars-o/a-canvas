@@ -34,19 +34,24 @@ function drawOnCanvas() {
         c.stroke();
     };
     // Move Circle
+    var numberOfCircles = 20;
     var r = 30;
-    var x = Math.random() * ( innerWidth - 2 * r ) + r;
-    var y = Math.random() * ( innerHeight - 2 * r ) + r;
-    var dx = 0;
-    while ( dx === 0 ) {
-        dx = Math.random() * 5 - 10;
+    var maxSpeed = 10;
+    var circles = [];
+    for ( i = 0; i < numberOfCircles; i ++ ) {
+        var x = Math.random() * ( innerWidth - 2 * r ) + r;
+        var y = Math.random() * ( innerHeight - 2 * r ) + r;
+        var dx = 0;
+        while ( dx === 0 ) {
+            dx = ( Math.random() - 0.5 ) * maxSpeed;
+        };
+        var dy = 0;
+        while ( dy === 0 ) {
+            dy = ( Math.random() - 0.5 ) * maxSpeed;
+        };
+        circles.push( new Circle( x, y, dx, dy, r ) );
+        circles[ i ].draw();
     };
-    var dy = 0;
-    while ( dy === 0 ) {
-        dy = Math.random() * 5 - 10;
-    };
-    var circle = new Circle( x, y, dx, dy, r );
-    circle.draw();
     animate();
     function Circle( x, y, dx, dy, r ) {
         this.x = x;
@@ -76,6 +81,8 @@ function drawOnCanvas() {
     function animate() {
         requestAnimationFrame( animate );
         c.clearRect( 0, 0, innerWidth, innerHeight );
-        circle.update();
+        for ( i = 0; i < circles.length; i ++ ) {
+            circles[ i ].update();
+        };
     };
 };
