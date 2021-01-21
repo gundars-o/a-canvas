@@ -79,3 +79,8 @@ branch main
 git add .
 git commit -m "Enabled different minimal size of each circle."
 git push
+
+branch main
+git add .
+git commit -m "Enabled 6 different colors for circles."
+git push

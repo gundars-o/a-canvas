@@ -1,6 +1,8 @@
 var canvas = document.querySelector( "canvas" );
 window.addEventListener( "resize", setCanvasSize );
 var c = canvas.getContext( "2d" );
+var color = 240;
+document.body.style.backgroundColor = "hsl("+color+", 100%, 5% )";
 setCanvasSize();
 function setCanvasSize() {
     canvas.width = window.innerWidth;
@@ -34,11 +36,11 @@ function drawOnCanvas() {
         c.stroke();
     };
     // Move Circle
-    var numberOfCircles = 200;
+    var numberOfCircles = 900;
     var r = 30;
     var radiusIncrease = 2;
     var radiusDecrease = 0.5;
-    var maxSpeed = 5;
+    var maxSpeed = 10;
     var circles = [];
     var mouse = {
         c: undefined
@@ -47,6 +49,14 @@ function drawOnCanvas() {
     var maxRadius = 40;
     var minRadius = 5;
     var impactRadiuss = 50;
+    var colors = [
+        "hsla("+color+", 100%, 10%, 0.75 )",
+        "hsla("+color+", 100%, 20%, 0.75 )",
+        "hsla("+color+", 100%, 30%, 0.75 )",
+        "hsla("+color+", 100%, 40%, 0.75 )",
+        "hsla("+color+", 100%, 50%, 0.75 )",
+        "hsla("+color+", 100%, 60%, 0.75 )",
+    ];
     window.addEventListener( "mousemove", function( event ) {
         mouse.x = event.x;
         mouse.y = event.y
@@ -74,10 +84,12 @@ function drawOnCanvas() {
         this.dy = dy;
         this.r = r;
         this.minRadius = r;
+        this.color = colors[ Math.floor( Math.random() * colors.length ) ];
         this.draw = function() {
             c.beginPath();
             c.arc( this.x, this.y, this.r, 0, Math.PI * 2, false );
-            c.strokeStyle = "blue";
+            c.strokeStyle = this.color;
+            c.fillStyle = this.color;
             c.stroke();
             c.fill();
         };
