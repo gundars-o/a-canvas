@@ -34,10 +34,23 @@ function drawOnCanvas() {
         c.stroke();
     };
     // Move Circle
-    var numberOfCircles = 20;
+    var numberOfCircles = 200;
     var r = 30;
-    var maxSpeed = 10;
+    var radiusIncrease = 2;
+    var radiusDecrease = 0.5;
+    var maxSpeed = 5;
     var circles = [];
+    var mouse = {
+        c: undefined
+        , y: undefined
+    };
+    var maxRadius = 40;
+    var minRadius = 5;
+    var impactRadiuss = 50;
+    window.addEventListener( "mousemove", function( event ) {
+        mouse.x = event.x;
+        mouse.y = event.y
+    } );
     for ( i = 0; i < numberOfCircles; i ++ ) {
         var x = Math.random() * ( innerWidth - 2 * r ) + r;
         var y = Math.random() * ( innerHeight - 2 * r ) + r;
@@ -75,7 +88,22 @@ function drawOnCanvas() {
             };
             this.x += this.dx;
             this.y += this.dy;
+            if (
+                Math.abs( this.x - mouse.x ) < impactRadiuss && 
+                Math.abs( this.y - mouse.y ) < impactRadiuss
+            ) {
+                if ( this.r < maxRadius && notTooCloseToBorder( this.x, this.y, this.r ) ) this.r += radiusIncrease ;
+            } else {
+                if ( this.r > minRadius ) this.r -= radiusDecrease ;
+            };
             this.draw();
+        };
+        function notTooCloseToBorder( x, y, r ) {
+            if ( x <= r + radiusIncrease ) return false;
+            if ( innerWidth - x <= r + radiusIncrease ) return false;
+            if ( y <= r + radiusIncrease ) return false;
+            if ( innerHeight - y <= r + radiusIncrease ) return false;
+            return true;
         };
     };
     function animate() {
