@@ -55,6 +55,7 @@ function drawOnCanvas() {
         var x = Math.random() * ( innerWidth - 2 * r ) + r;
         var y = Math.random() * ( innerHeight - 2 * r ) + r;
         var dx = 0;
+        var startRadius = 1 + Math.random() * minRadius;
         while ( dx === 0 ) {
             dx = ( Math.random() - 0.5 ) * maxSpeed;
         };
@@ -62,7 +63,7 @@ function drawOnCanvas() {
         while ( dy === 0 ) {
             dy = ( Math.random() - 0.5 ) * maxSpeed;
         };
-        circles.push( new Circle( x, y, dx, dy, r ) );
+        circles.push( new Circle( x, y, dx, dy, startRadius ) );
         circles[ i ].draw();
     };
     animate();
@@ -72,6 +73,7 @@ function drawOnCanvas() {
         this.dx = dx;
         this.dy = dy;
         this.r = r;
+        this.minRadius = r;
         this.draw = function() {
             c.beginPath();
             c.arc( this.x, this.y, this.r, 0, Math.PI * 2, false );
@@ -94,7 +96,7 @@ function drawOnCanvas() {
             ) {
                 if ( this.r < maxRadius && notTooCloseToBorder( this.x, this.y, this.r ) ) this.r += radiusIncrease ;
             } else {
-                if ( this.r > minRadius ) this.r -= radiusDecrease ;
+                if ( this.r > this.minRadius ) this.r -= radiusDecrease ;
             };
             this.draw();
         };

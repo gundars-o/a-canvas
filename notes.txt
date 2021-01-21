@@ -71,3 +71,11 @@ git commit -m "Enabled 20 circles."
 git push
 
 branch main
+git add .
+git commit -m "Increase size of circles in mouse area."
+git push
+
+branch main
+git add .
+git commit -m "Enabled different minimal size of each circle."
+git push
